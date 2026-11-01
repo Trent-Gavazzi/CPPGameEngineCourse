@@ -1,0 +1,12 @@
+SFML Window
+
+The top left hand corner is our origin, however y increases in the "down direction".
+Our shape coordinate is the top left verticy of the rectangle made by the shape.
+    - Circles do the same using the radius to build a square
+
+To know if a shape is checking we make a check on every side every frame.
+    - If the x location for example is less than 0 for the left side
+    - We need to figure out the other side's y and x cords using the diameter.
+
+Animation is drawing something every frame
+    - circle.setPosition(circle.getPosition().x - circleMoveSpeed, circle.getPosition().y - circleMoveSpeed)
