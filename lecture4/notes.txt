@@ -10,3 +10,20 @@ To know if a shape is checking we make a check on every side every frame.
 
 Animation is drawing something every frame
     - circle.setPosition(circle.getPosition().x - circleMoveSpeed, circle.getPosition().y - circleMoveSpeed)
+
+A general C++ rile, virtual dispatch only occurs when you call through a pointer or a reference
+so we require something like this code to avoid splicing in a vector<Shape> for example:
+A pointer avoids this because every pointer is the same size no matter what it points to. The vector stores pointers, and the full Circle lives elsewhere on the heap, intact:
+
+Shape  s = Circle(...);   // sliced: s is just a Shape
+Shape& r = circle;        // fine: r refers to the whole Circle
+Shape* p = &circle;       // fine: p points at the whole Circle
+p->buildShape();          // calls Circle::buildShape
+
+unique_ptr deletes the object automatically when it’s removed from the vector or the vector is destroyed.
+That is why we use this when dealing with pointers on objects, shared_ptr works too but only for co ownership.
+
+std::move tells the compiler we are done with the object (takes in a pointer)
+
+ORDER FOR RENDERING
+update -> close -> render -> display
